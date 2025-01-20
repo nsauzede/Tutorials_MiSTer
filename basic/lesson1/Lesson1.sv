@@ -208,10 +208,13 @@ localparam CONF_STR = {
 	"-;",
 	"-;",
 	"-;",
+	"J1,Red;",
+	"jn,A;",
 	"V,v",`BUILD_DATE
 
 };
 
+wire [31:0] joy;
 
 //
 // HPS is the module that communicates between the linux and fpga
@@ -223,7 +226,7 @@ hps_io #(.STRLEN(($size(CONF_STR)>>3)) , .PS2DIV(1000), .WIDE(1)) hps_io
 	.clk_sys(clk_sys),
 	.HPS_BUS(HPS_BUS),
 	.status(status),
-
+	.joystick_0(joy),
 	.conf_str(CONF_STR)
 	
 );
@@ -243,11 +246,12 @@ pll pll
 );
 
 ///////////////////////////////////////////////////
-
+wire [7:0] color = joy[4] ? 8'b000_111_00 : 8'hFF;
 
 assign CLK_VIDEO = clk_sys;
 assign CE_PIXEL = 1;
 vga vga (
+	 .color (color),
 	 .pclk  (clk_sys),
 	 .hs    (VGA_HS),
 	 .vs    (VGA_VS),

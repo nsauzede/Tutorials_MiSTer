@@ -8,6 +8,7 @@
 // http://tinyvga.com/vga-timing/640x400@70Hz
 
 module vga (
+   input [7:0] color,
    // pixel clock
    input  pclk,
    // VGA output
@@ -84,7 +85,7 @@ always@(posedge pclk) begin
 		if(h_cnt[1:0] == 2'b11)
 			video_counter <= video_counter + 14'd1;
 		
-		pixel <= (v_cnt[2] ^ h_cnt[2])?8'h00:8'hff;    // checkboard
+		pixel <= (v_cnt[2] ^ h_cnt[2])?8'h00:color;    // checkboard
 		de<=1;
 	end else begin
 		if(h_cnt == H+HFP) begin
