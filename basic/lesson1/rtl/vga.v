@@ -100,9 +100,9 @@ always@(posedge pclk) begin
 end
 
 // seperate 8 bits into three colors (332)
-assign r = { pixel[7:5],  3'b00000 };
-assign g = { pixel[4:2],  3'b00000 };
-assign b = { pixel[1:0], 4'b000000 };
+assign r = { pixel[7:5], pixel[7:5], pixel[7:6] };
+assign g = { pixel[4:2], pixel[4:2], pixel[4:3] };
+assign b = { pixel[1:0], pixel[1:0], pixel[1:0], pixel[1:0] };
 
 //assign VGA_DE  = ~(hblank | vblank);
 assign VGA_DE = de;
