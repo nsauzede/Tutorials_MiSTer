@@ -86,6 +86,7 @@ always@(posedge pclk) begin
 			video_counter <= video_counter + 14'd1;
 		
 		pixel <= (v_cnt[2] ^ h_cnt[2])?8'h00:color;    // checkboard
+		// pixel <= video_counter[7:0];                // color pattern
 		de<=1;
 	end else begin
 		if(h_cnt == H+HFP) begin

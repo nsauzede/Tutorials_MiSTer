@@ -9,16 +9,15 @@
 module vga (
    // pixel clock
    input  pclk,
-	
+	input [31:0] joy,
 	// CPU interface (write only!)
-	input  cpu_clk,
-	input  cpu_wr,
-	input [13:0] cpu_addr,
-	input [7:0] cpu_data,
+	input  ioctl_wr,
+	input [13:0] ioctl_addr,
+	input [7:0] ioctl_data,
 		
    // VGA output
-   output reg	hs,
-   output reg 	vs,
+   output 	hs,
+   output  	vs,
    output [7:0] r,
    output [7:0] g,
    output [7:0] b,
@@ -36,11 +35,16 @@ parameter VFP = 12;     // unused time before vsync
 parameter VS  = 2;      // width of vsync
 parameter VBP = 35;     // unused time after vsync
 
-reg[9:0]  h_cnt;        // horizontal pixel counter
-reg[9:0]  v_cnt;        // vertical pixel counter
+reg[9:0]  h_cnt = 0;        // horizontal pixel counter
+reg[9:0]  v_cnt = 0;        // vertical pixel counter
 
 reg hblank;
 reg vblank;
+
+reg hs_r = 1;
+assign hs = hs_r;
+reg vs_r = 0;
+assign vs = vs_r;
 
 // both counters count from the begin of the visibla area
 
@@ -50,8 +54,8 @@ always@(posedge pclk) begin
 	else                        h_cnt <= h_cnt + 10'b1;
 
 	// generate negative hsync signal
-	if(h_cnt == H+HFP)    hs <= 1'b0;
-	if(h_cnt == H+HFP+HS) hs <= 1'b1;
+	if(h_cnt == H+HFP)    hs_r <= 1'b0;
+	if(h_cnt == H+HFP+HS) hs_r <= 1'b1;
 	//if(h_cnt == H+HFP+HS) hblank <= 1'b1; else hblank<=1'b0;
 
 	end
@@ -64,25 +68,29 @@ always@(posedge pclk) begin
 		else							   v_cnt <= v_cnt + 10'b1;
 
 	        // generate positive vsync signal
-		if(v_cnt == V+VFP)    vs <= 1'b1;
-		if(v_cnt == V+VFP+VS) vs <= 1'b0;
+		if(v_cnt == V+VFP)    vs_r <= 1'b1;
+		if(v_cnt == V+VFP+VS) vs_r <= 1'b0;
 		//if(v_cnt == V+VFP+VS) vblank <= 1'b1; else vblank<=1'b0;
 	end
 end
 
 // read VRAM
-reg [13:0] video_counter;
-reg [7:0] pixel;
+reg [13:0] video_counter = 0;
+wire [7:0] pixel;
 reg de;
 
-// 16000 bytes of internal video memory for 160x100 pixel at 8 Bit (RGB 332)
-reg [7:0] vmem [160*100-1:0];
+dpram #(.init_file("image.hex"), .widthad_a(14), .width_a(8)) vmem
+(
+    .clock_a(pclk),
+    .address_a(video_counter),
+    .wren_a(1'b0),
+    .q_a(pixel),
 
-
-// write VRAM via CPU interface
-always @(posedge cpu_clk)
-	if(cpu_wr) 
-		vmem[cpu_addr] <= cpu_data;
+    .clock_b(pclk),
+    .wren_b(ioctl_wr),
+    .address_b(ioctl_addr),
+    .data_b(ioctl_data)
+);
 
 always@(posedge pclk) begin
         // The video counter is being reset at the begin of each vsync.
@@ -96,10 +104,6 @@ always@(posedge pclk) begin
 	if((v_cnt < V) && (h_cnt < H)) begin
 		if(h_cnt[1:0] == 2'b11)
 			video_counter <= video_counter + 14'd1;
-		
-		//pixel <= (v_cnt[2] ^ h_cnt[2])?8'h00:8'hff;    // checkboard
-		// pixel <= video_counter[7:0];                // color pattern
-		pixel <= vmem[video_counter];               // read VRAM
 		de<=1;
 	end else begin
 		if(h_cnt == H+HFP) begin
@@ -109,26 +113,14 @@ always@(posedge pclk) begin
 				video_counter <= video_counter - 14'd160;
 		de<=0;
 		end
-			
-		pixel <= 8'h00;   // black
 	end
 end
 
 // seperate 8 bits into three colors (332)
-assign r = { pixel[7:5],  pixel[7:5] , pixel[7:6]};
-assign g = { pixel[4:2],  pixel[4:2] , pixel[4:3]};
-assign b = { pixel[1:0], pixel[1:0] , pixel[1:0],pixel[1:0] };
-
-// split the 8 rgb bits into the three base colors. Every second line is
-// darker to give some scanlines effect
-//assign r = (!v_cnt[0])?{ pixel[7:5],  3'b00000 }:{ 1'b0, pixel[7:5],  2'b0000 };
-//assign g = (!v_cnt[0])?{ pixel[4:2],  3'b00000 }:{ 1'b0, pixel[4:2],  2'b0000 };
-//assign b = (!v_cnt[0])?{ pixel[1:0], 4'b000000 }:{ 1'b0, pixel[1:0], 3'b00000 };
-
-
-//assign r = 8'h00;
-//assign g = 8'hff;
-//assign b = 8'h00;
+// Every second line is darker to give some scanlines effect
+assign r = (joy[4] & !v_cnt[0])?{ 1'b0, pixel[7:5],  pixel[7:5] , pixel[7]}:{ pixel[7:5],  pixel[7:5] , pixel[7:6]};
+assign g = (joy[4] & !v_cnt[0])?{ 1'b0, pixel[4:2],  pixel[4:2] , pixel[4]}:{ pixel[4:2],  pixel[4:2] , pixel[4:3]};
+assign b = (joy[4] & !v_cnt[0])?{ 1'b0, pixel[1:0], pixel[1:0] , pixel[1:0],pixel[1] }:{ pixel[1:0], pixel[1:0] , pixel[1:0],pixel[1:0] };
 
 //assign VGA_DE  = ~(hblank | vblank);
 assign VGA_DE = de;

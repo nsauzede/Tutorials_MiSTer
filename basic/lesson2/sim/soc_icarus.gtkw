@@ -1,0 +1,60 @@
+[*]
+[*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
+[*] Wed Jan 22 16:17:41 2025
+[*]
+[dumpfile] "/home/nsauzede/perso/git/Tutorials_MiSTer/basic/lesson2/sim/soc_icarus.vcd"
+[dumpfile_mtime] "Wed Jan 22 16:17:26 2025"
+[dumpfile_size] 16972738
+[savefile] "/home/nsauzede/perso/git/Tutorials_MiSTer/basic/lesson2/sim/soc_icarus.gtkw"
+[timestart] 0
+[size] 1904 808
+[pos] -1 -1
+*-28.808584 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] soc_tb.
+[treeopen] soc_tb.soc1.
+[sst_width] 276
+[signals_width] 182
+[sst_expanded] 1
+[sst_vpaned_height] 234
+@420
+soc_tb.soc1.vga.H
+soc_tb.soc1.vga.HBP
+soc_tb.soc1.vga.HFP
+soc_tb.soc1.vga.HS
+soc_tb.soc1.vga.V
+soc_tb.soc1.vga.VBP
+soc_tb.soc1.vga.VFP
+@28
+soc_tb.soc1.vga.VGA_DE
+@420
+soc_tb.soc1.vga.VS
+@22
+soc_tb.soc1.vga.b[7:0]
+@28
+soc_tb.soc1.vga.de
+@22
+soc_tb.soc1.vga.g[7:0]
+soc_tb.soc1.vga.h_cnt[9:0]
+@28
+soc_tb.soc1.vga.hs
+soc_tb.soc1.vga.hs_r
+@23
+soc_tb.soc1.vga.ioctl_addr[13:0]
+@22
+soc_tb.soc1.vga.ioctl_data[7:0]
+@28
+soc_tb.soc1.vga.ioctl_wr
+@22
+soc_tb.soc1.vga.joy[31:0]
+@28
+soc_tb.soc1.vga.pclk
+@22
+soc_tb.soc1.vga.pixel[7:0]
+soc_tb.soc1.vga.r[7:0]
+soc_tb.soc1.vga.v_cnt[9:0]
+soc_tb.soc1.vga.video_counter[13:0]
+@28
+soc_tb.soc1.vga.vs
+soc_tb.soc1.vga.vs_r
+[pattern_trace] 1
+[pattern_trace] 0
