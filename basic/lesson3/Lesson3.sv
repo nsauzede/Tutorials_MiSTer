@@ -190,7 +190,8 @@ wire [1:0] ar = status[9:8];
 assign VIDEO_ARX = (!ar) ? 12'd4 : (ar - 1'd1);
 assign VIDEO_ARY = (!ar) ? 12'd3 : 12'd0;
 
-assign LED_USER  = copy_in_progress;
+//assign LED_USER  = copy_in_progress;
+assign LED_USER  = 1'b0;
 
 `include "build_id.v"
 localparam CONF_STR = {

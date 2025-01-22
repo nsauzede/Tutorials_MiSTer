@@ -16,5 +16,19 @@ $(DUT).vcd: $(DUT).output
 $(DUT).output: $(SRC)
 	iverilog $(IVOPT) -o $@ $^
 
+VOPT:=-cc -exe --trace --Mdir ./tmp
+VOPT+=--timescale-override 1ns/1ps --timescale 1ns/1ps
+VOPT+=+define+debug=1 +define+SIMULATION=1
+VOPT+=--threads 3 --top-module soc_tb
+#VOPT+=-CFLAGS x
+#VOPT+=-LDFLAGS x
+#VOPT+=--Wno-MULTIDRIVEN
+VOPT+=--Wno-PINMISSING
+VOPT+=--timing
+V:=verilator
+verilate:
+	$(V) $(VOPT) $(SRC)
+
 clean:
 	rm -f $(DUT).output $(DUT).vcd image.hex
+	rm -rf ./tmp

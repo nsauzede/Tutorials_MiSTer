@@ -1,6 +1,7 @@
 #pragma once
 #include <queue>
-#include "verilated_heavy.h"
+#include <verilated.h>
+//#include "verilated_heavy.h"
 #include "sim_console.h"
 
 

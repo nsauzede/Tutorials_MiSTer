@@ -62,7 +62,10 @@ C_SRC = \
 	sim_main.cpp  imgui/imgui_impl_sdl.cpp imgui/imgui_impl_opengl2.cpp imgui/imgui_draw.cpp imgui/imgui_widgets.cpp imgui/imgui.cpp imgui/imgui_tables.cpp
 VOUT = tmp/Vtop.cpp
 
-all: $(EXE)
+all: tmp/image.hex $(EXE)
+
+tmp/image.hex: ../rtl/image.hex
+	../sim/conv.py $< $@
 
 $(VOUT): $(V_SRC)  Makefile
 	$V -cc $(V_OPT) -LDFLAGS "$(LDFLAGS) " -exe --trace --Mdir ./tmp $(V_DEFINE) $(V_INC) $(TOP) -CFLAGS $(CFLAGS) $(V_SRC) $(C_SRC)

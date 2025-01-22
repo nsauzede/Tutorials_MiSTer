@@ -767,6 +767,17 @@ char str[] = "../Image Examples/bird.bin";
 #endif
 
 }
+void start_load_image2() {
+console.AddLog("load image2 here\n");
+#ifdef WIN32
+ ioctl_download_setfile("..\\rtl\\image.bin",0);
+#else
+char str[] = "../rtl/image.bin";
+// ioctl_download_setfile("../Image Examples/bird.bin",0);
+ ioctl_download_setfile(str,0);
+#endif
+
+}
 
 
 int my_count = 0;
@@ -1018,6 +1029,7 @@ int main(int argc, char** argv, char** env) {
 
 		if (ImGui::Button("RESET")) main_time = 0;
 		if (ImGui::Button("LOAD IMAGE")) start_load_image();
+		if (ImGui::Button("LOAD IMAGE2")) start_load_image2();
 		ImGui::Text("main_time %d", main_time);
 		ImGui::Text("frame_count: %d  line_count: %d", frame_count, line_count);
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);

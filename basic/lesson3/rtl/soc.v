@@ -77,6 +77,12 @@ T80s T80s (
 */
 
 tv80s T80x  (
+	.m1_n(),
+	.iorq_n(),
+	.rfsh_n(),
+	.halt_n(),
+	.busak_n(),
+
 	.reset_n   ( !cpu_reset    ),
 	.clk       ( cpu_clock     ),
 	.wait_n    ( 1'b1          ),
@@ -101,6 +107,13 @@ assign cpu_din = cpu_addr[15]?ram_data_out:rom_data_out;
 
 dpram #( .init_file("rom.hex"),.widthad_a(12),.width_a(8)) rom
 (
+.data_a(),
+.address_b(),
+.data_b(),
+.q_b(),
+.byteena_a(),
+.byteena_b(),
+
         .clock_a(cpu_clock),
         .address_a(cpu_addr[11:0]),
         .wren_a(1'b0),
@@ -113,6 +126,9 @@ dpram #( .init_file("rom.hex"),.widthad_a(12),.width_a(8)) rom
 
 dpram #( .init_file(""),.widthad_a(12),.width_a(8)) ram
 (
+.byteena_a(),
+.byteena_b(),
+
         .clock_a(cpu_clock),
         .address_a(cpu_addr[11:0]),
         .wren_a(!cpu_wr_n && cpu_addr[15]),
@@ -123,7 +139,7 @@ dpram #( .init_file(""),.widthad_a(12),.width_a(8)) ram
         .address_b(cpu_addr[11:0]),
         .wren_b(1'b0),
         .q_b(),
-        .data_b(),
+        .data_b()
 
 );
 

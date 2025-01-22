@@ -1,5 +1,6 @@
 #include <verilated.h>
 #include "Vtop.h"
+#include "Vtop___024root.h"
 
 #include "imgui.h"
 #ifndef _MSC_VER
@@ -243,22 +244,22 @@ int main(int argc, char** argv, char** env) {
 
                 ImGui::Begin("ROM Editor");
         //mem_edit_1.DrawContents(top->top__DOT__soc__DOT__vga__DOT__vmem__DOT__mem, 16384, 0);
-                mem_edit_1.DrawContents(top->top__DOT__soc__DOT__rom__DOT__mem, 4096, 0);
+                mem_edit_1.DrawContents(&top->rootp->top__DOT__soc__DOT__rom__DOT__mem, 4096, 0);
                 ImGui::End();
                 ImGui::Begin("RAM Editor");
                 //mem_edit_1.DrawContents(top->top__DOT__soc__DOT__vga__DOT__vmem__DOT__mem, 16384, 0);
-                mem_edit_2.DrawContents(top->top__DOT__soc__DOT__ram__DOT__mem, 4096, 0);
+                mem_edit_2.DrawContents(&top->rootp->top__DOT__soc__DOT__ram__DOT__mem, 4096, 0);
                 ImGui::End();
                 ImGui::Begin("VRAM Editor");
                 //mem_edit_1.DrawContents(top->top__DOT__soc__DOT__vga__DOT__vmem__DOT__mem, 16384, 0);
-                mem_edit_3.DrawContents(top->top__DOT__soc__DOT__vga__DOT__vmem, 16000, 0);
+                mem_edit_3.DrawContents(&top->rootp->top__DOT__soc__DOT__vga__DOT__vmem, 16000, 0);
                 ImGui::End();
 
 
                 ImGui::Begin("CPU Registers");
                 ImGui::Spacing();
-                ImGui::Text("PC      0x%04X", top->top__DOT__soc__DOT__T80x__DOT__i_tv80_core__DOT__PC);
-                ImGui::Text("ACC      0x%04X", top->top__DOT__soc__DOT__T80x__DOT__i_tv80_core__DOT__ACC);
+                ImGui::Text("PC      0x%04X", &top->rootp->top__DOT__soc__DOT__T80x__DOT__i_tv80_core__DOT__PC);
+                ImGui::Text("ACC      0x%04X", &top->rootp->top__DOT__soc__DOT__T80x__DOT__i_tv80_core__DOT__ACC);
                 ImGui::Text("Main Registers");
 /*
                 ImGui::Text("B       0x%02X", top->top__DOT__soc__DOT__T80x__DOT__i_tv80_core__DOT__i_reg__DOT__B);
@@ -276,7 +277,7 @@ int main(int argc, char** argv, char** env) {
                 ImGui::Text("IY      0x%04X", top->top__DOT__soc__DOT__T80x__DOT__i_tv80_core__DOT__i_reg__DOT__IY);
                 ImGui::Text("SP      0x%04X", top->top__DOT__soc__DOT__T80x__DOT__i_tv80_core__DOT__SP);
 */
-                ImGui::Text("PC      0x%04X", top->top__DOT__soc__DOT__T80x__DOT__i_tv80_core__DOT__PC);
+                ImGui::Text("PC      0x%04X", &top->rootp->top__DOT__soc__DOT__T80x__DOT__i_tv80_core__DOT__PC);
 
                 ImGui::End();
 

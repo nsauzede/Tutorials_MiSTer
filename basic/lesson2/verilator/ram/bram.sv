@@ -3,7 +3,8 @@
 module dpram #(
     parameter width_a = 8,
     parameter widthad_a = 10,
-    parameter init_file= ""
+    parameter init_file= "",
+    parameter INIT_FILE  = "tmp/image.hex"
 ) (
     // Port A
     input   wire                clock_a,
@@ -25,6 +26,10 @@ module dpram #(
  
 // Shared memory
 reg [width_a-1:0] mem [(2**widthad_a)-1:0];
+initial begin
+$display("Loading mem.");
+$readmemh(INIT_FILE, mem, 0, (2**widthad_a)-1);
+end
 // Port A
 always @(posedge clock_a) begin
     q_a      <= mem[address_a];
