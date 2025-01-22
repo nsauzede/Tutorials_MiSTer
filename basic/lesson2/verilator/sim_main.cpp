@@ -10,6 +10,7 @@
 
 #include <verilated.h>
 #include "Vtop.h"
+#include "Vtop___024root.h"
 
 
 #ifndef _MSC_VER
@@ -760,7 +761,9 @@ console.AddLog("load image here\n");
 #ifdef WIN32
  ioctl_download_setfile("..\\Image Examples\\bird.bin",0);
 #else
- ioctl_download_setfile("../Image Examples/bird.bin",0);
+char str[] = "../Image Examples/bird.bin";
+// ioctl_download_setfile("../Image Examples/bird.bin",0);
+ ioctl_download_setfile(str,0);
 #endif
 
 }
@@ -940,7 +943,7 @@ int main(int argc, char** argv, char** env) {
 
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, VGA_WIDTH, VGA_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE,disp_ptr);
-    ImTextureID my_tex_id = (ImTextureID) tex;
+    ImTextureID my_tex_id = (ImTextureID) (uintptr_t)tex;
 
 
 //    ImTextureID my_tex_id = (ImTextureID) renderedTexture;
@@ -1039,7 +1042,7 @@ int main(int argc, char** argv, char** env) {
 		ImGui::End();
 
 		ImGui::Begin("RAM Editor");
-        	mem_edit_1.DrawContents(top->top__DOT__soc__DOT__vga__DOT__vmem__DOT__mem, 16384, 0);
+        	mem_edit_1.DrawContents(&top->rootp->top__DOT__soc__DOT__vga__DOT__vmem__DOT__mem, 16384, 0);
         	ImGui::End();
 		
 
