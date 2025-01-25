@@ -30,9 +30,8 @@ gui: $(GUI)
 $(VOUT): $(V_SRC) Makefile
 	$(VLATOR) -cc $(VOPT) -LDFLAGS "$(GUI_LDFLAGS) " --Mdir $(GUI_DIR) -exe $(V_DEFINE) $(V_INC) $(GUI_TOP) -CFLAGS $(GUI_CFLAGS) $(V_SRC) $(GUI_C_SRC) && touch $(VOUT)
 
-#$(GUI): CXXFLAGS+=-DTOP=TEH_TOP
 $(GUI): $(VOUT) $(GUI_C_SRC)
-	(cd $(GUI_DIR); make -f $(VTOP).mk CXXFLAGS+=-DTHETOP='\"$(TOP)\"')
+	(cd $(GUI_DIR); make -f $(VTOP).mk)
 
 view: ./$(VCD_FILE)
 	gtkwave $< $$(test -f $(GTKW) && echo $(GTKW))
