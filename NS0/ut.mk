@@ -3,21 +3,22 @@
 
 UT_FAST:=1
 UT_SLOW:=0
-UT_NOPY:=0
-UT_NOGT:=0
-UT_VERBOSE:=1
+UT_NOPY:=1
+UT_NOGT:=1
+UT_VERBOSE:=0
 
 # Usual macros (CFLAGS, CXXFLAGS, LDFLAGS, LDLIBS, LD_LIBRARY_PATH, ..) can be defined, eg:
 #CXXFLAGS:=-I this/path -D THAT_SYMBOL ...
 # Or even UT internal ones, like VGO (valgrind options), eg:
 #VGO:=--suppressions=my_vg.supp --gen-suppressions=all
 
-OBJ_DIR:=obj_dir
-V_TOP:=Vmux2
+TOP:=mux2
+OBJ_DIR:=tmp
+V_TOP:=V$(TOP)
 V_TOP_:=$(OBJ_DIR)/$(V_TOP)
 V_MK_:=$(V_TOP).mk
 V_MK:=$(OBJ_DIR)/$(V_MK_)
-V_SRC:=mux2.v
+V_SRC:=$(TOP).v
 
 ifndef VERILATOR_ROOT
 VERILATOR_ROOT:=/usr/share/verilator
@@ -34,6 +35,6 @@ UT_CUSTOM_DEPS+=$(V_MK)
 LDLIBS+=$(OBJ_DIR)/$(V_TOP)*.o
 LDLIBS+=$(OBJ_DIR)/verilated*.o
 
-obj_dir/%.mk: $(V_SRC)
+$(OBJ_DIR)/%.mk: $(V_SRC)
 	$(MAKE) lint verilate && touch $@
 	$(MAKE) -C $(OBJ_DIR) -f $(V_MK_) LIBS+="-lgtest -lgtest_main"
