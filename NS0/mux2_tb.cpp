@@ -10,14 +10,15 @@ class TB {
     Vmux2* top;
     VerilatedVcdC* tfp;
 public:
-    TB(int argc = 0, char **argv = 0) {
+    TB(int argc = 0, char **argv = 0):top(0),tfp(0) {
         Verilated::commandArgs(argc, argv);
         top = new Vmux2;
+#ifdef VCD_FILE
         tfp = new VerilatedVcdC;
         Verilated::traceEverOn(true);
         top->trace(tfp, 99);
         tfp->open(VCD_FILE);
-
+#endif
         top->sel = 0;
         top->a = 0;
         top->b = 1;
@@ -38,13 +39,13 @@ public:
         step();
         EXPECT_EQ(top->y, 1);
 
-        tfp->close();
+        if (tfp){tfp->close();delete tfp;}
         delete top;
     }
     void step(int inc = 10) {
         top->eval();
         tfp->dump(Verilated::time());
         printf("%d %d %d %d\t at #%ld\n", top->a, top->b, top->sel, top->y, Verilated::time());
-        Verilated::timeInc(inc); // Advance time by inc units
+        Verilated::timeInc(inc);
     }
 };

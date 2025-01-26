@@ -4,7 +4,7 @@
 UT_FAST:=0
 UT_SLOW:=0
 UT_NOPY:=1
-UT_NOGT:=0
+UT_NOGT:=1
 UT_VERBOSE:=0
 
 # Usual macros (CFLAGS, CXXFLAGS, LDFLAGS, LDLIBS, LD_LIBRARY_PATH, ..) can be defined, eg:
@@ -12,7 +12,7 @@ UT_VERBOSE:=0
 # Or even UT internal ones, like VGO (valgrind options), eg:
 #VGO:=--suppressions=my_vg.supp --gen-suppressions=all
 
-TOP:=mux2
+TOP:=counter
 OBJ_DIR:=tmp
 V_TOP:=V$(TOP)
 V_TOP_:=$(OBJ_DIR)/$(V_TOP)
@@ -26,8 +26,7 @@ endif
 
 CXXFLAGS+=-I $(OBJ_DIR)
 ifdef VERILATOR_ROOT
-CXXFLAGS+=-I $(VERILATOR_ROOT)/include
-CXXFLAGS+=-Wno-sign-compare
+CXXFLAGS+=-I $(VERILATOR_ROOT)/include -Wno-sign-compare
 endif
 
 UT_CUSTOM_ALL+=$(V_MK)

@@ -1,0 +1,24 @@
+[*]
+[*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
+[*] Sun Jan 26 01:01:03 2025
+[*]
+[dumpfile] "/home/nsauzede/perso/git/Tutorials_MiSTer/NS1/waveform.vcd"
+[dumpfile_mtime] "Sun Jan 26 01:00:53 2025"
+[dumpfile_size] 576
+[savefile] "/home/nsauzede/perso/git/Tutorials_MiSTer/NS1/counter.gtkw"
+[timestart] 0
+[size] 1898 324
+[pos] 1931 579
+*-3.887525 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 276
+[signals_width] 94
+[sst_expanded] 1
+[sst_vpaned_height] 61
+@29
+TOP.clk
+@22
+TOP.out[3:0]
+@28
+TOP.reset
+[pattern_trace] 1
+[pattern_trace] 0

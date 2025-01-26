@@ -1,9 +1,9 @@
 /******************************************************************************/
 
-#include <gtest/gtest.h>
+#include <ut/ut.h>
 
-#include "mux2_tb.cpp"
+#include "counter_tb.cpp"
 
-TEST(Test, Simple) {
+TESTMETHOD(test_Simple) {
     TB tb;
 }
