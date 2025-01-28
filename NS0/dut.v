@@ -1,4 +1,4 @@
-module mux2 (
+module dut (
     input wire a,
     input wire b,
     input wire sel,

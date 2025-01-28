@@ -1,7 +1,7 @@
 
-#define EXPECT_EQ(l,r) do{}while(0)
+#define EXPECT_EQ(l,r) do{assert((l) == (r));}while(0)
 
-#include "counter_tb.cpp"
+#include "dut_tb.cpp"
 
 int main(int argc, char *argv[]) {
     TB tb(argc, argv);

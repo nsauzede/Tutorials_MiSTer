@@ -1,3 +1,1 @@
-TOP:=mux2
-
-include main.mk
+include ../NS0/dut.mk

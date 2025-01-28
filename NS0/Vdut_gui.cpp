@@ -3,52 +3,38 @@
 #include <backends/imgui_impl_opengl3.h>
 #include <SDL2/SDL.h>
 #include <GL/glew.h> // Use GLEW for OpenGL function loading
-#include "Vcounter.h"
-Vcounter *top = NULL;
-vluint64_t main_time = 0, last_step = 0;
-static bool clk, reset, autoreset, run = true, autostep = true, quit;
-static int step, step_time = 10, inc = 1;
-void init_top() { if (!top) top = new Vcounter; }
+#include "Vdut.h"
+Vdut *dut = NULL;
+static bool a, b, sel;
+void init_dut() {
+    if (!dut) dut = new Vdut;
+}
 void handle_key_event(SDL_Event& event) {
     if (event.type == SDL_KEYDOWN) {
-        if (event.key.keysym.sym == SDLK_c) { clk = !clk; }
-        else if (event.key.keysym.sym == SDLK_r) { reset = !reset; }
-        else if (event.key.keysym.sym == SDLK_s) { step = 2; }
-        else if (event.key.keysym.sym == SDLK_a) { autostep = !autostep; }
-        else if (event.key.keysym.sym == SDLK_SPACE) { run = !run; }
+        if (event.key.keysym.sym == SDLK_a)
+            a = !a;
+        else if (event.key.keysym.sym == SDLK_b)
+            b = !b;
+        else if (event.key.keysym.sym == SDLK_s)
+            sel = !sel;
     }
 }
 void render_gui() {
-    ImGui::Begin("counter");
-    ImGui::Checkbox("Run", &run);
-    ImGui::SameLine();if (ImGui::Button("Quit")) { quit = true; }
-    ImGui::SameLine();ImGui::Checkbox("AutoStep", &autostep);
-    ImGui::SameLine();if (ImGui::Button("Step")) { step = 2; }
-    ImGui::SameLine();ImGui::Text("step=%d", step);
-    ImGui::SameLine();ImGui::Text("main_time %ld, Vtime=%ld", main_time, Verilated::time());
-    ImGui::SliderInt("StepTime", &step_time, 1, 10);
-    ImGui::SameLine();ImGui::Text("last_step=%ld", last_step);
-    ImGui::Checkbox("clk", &clk);
-    ImGui::SameLine();ImGui::Checkbox("AutoReset", &autoreset);
-    ImGui::SameLine();if (ImGui::Button("Reset")) { reset = true; }
-    if ((main_time++>=(last_step+step_time)) && run) {
-        if (step) { clk = !clk; }
-        top->clk = clk;
-        top->reset = reset;
-        top->eval();
-        Verilated::timeInc(inc);
-        if (step) { step--; }
-        if (autostep && !step) { step = 2; }
-        reset = false;
-        if (autoreset) reset = true;
-        last_step = main_time;
-    }
-    ImGui::SameLine();ImGui::Text("out %d", top->out);
+    ImGui::Begin("dut");
+    ImGui::Checkbox("a", &a);ImGui::SameLine();
+    ImGui::Checkbox("b", &b);ImGui::SameLine();
+    ImGui::Checkbox("sel", &sel);ImGui::SameLine();
+    dut->a = a;
+    dut->b = b;
+    dut->sel = sel;
+    dut->eval();
+    bool y = dut->y;
+    ImGui::BeginDisabled();ImGui::Checkbox("y", &y);ImGui::EndDisabled();
     ImGui::End();
 }
-////////////////////////////////////////////////////////////////////////////////
+
 int main() {
-    init_top();
+    init_dut();
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0) {
         printf("Error: %s\n", SDL_GetError());
         return -1;
@@ -74,12 +60,14 @@ int main() {
     ImGui_ImplSDL2_InitForOpenGL(window, gl_context);
     ImGui_ImplOpenGL3_Init("#version 130"); // GLSL version 130
     SDL_Event event;
-    while (!quit) {
+    bool running = true;
+    while (running) {
         while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT) {
-                printf("SDL_QUIT\n");
-                quit = true;
-            } else
+            if (event.type == SDL_QUIT)
+                running = false;
+            else if (event.key.keysym.sym == SDLK_ESCAPE)
+                running = false;
+            else
                 handle_key_event(event);
             ImGui_ImplSDL2_ProcessEvent(&event); // Pass events to ImGui
         }
@@ -98,7 +86,6 @@ int main() {
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         SDL_GL_SwapWindow(window);
     }
-    printf("Shutting down..\n");
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplSDL2_Shutdown();
     ImGui::DestroyContext();

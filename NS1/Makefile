@@ -1,3 +1,1 @@
-TOP:=counter
-
-include ../NS0/main.mk
+include ../NS0/dut.mk

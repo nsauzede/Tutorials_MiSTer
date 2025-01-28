@@ -1,4 +1,4 @@
-module counter (
+module dut (
     input wire clk,
     input wire reset,
     output wire [3:0] out

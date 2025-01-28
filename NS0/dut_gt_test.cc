@@ -2,7 +2,7 @@
 
 #include <gtest/gtest.h>
 
-#include "mux2_tb.cpp"
+#include "dut_tb.cpp"
 
 TEST(Test, Simple) {
     TB tb;

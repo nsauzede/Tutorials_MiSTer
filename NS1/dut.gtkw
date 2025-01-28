@@ -1,0 +1,25 @@
+[*]
+[*] GTKWave Analyzer v3.3.120 (w)1999-2024 BSI
+[*] Tue Jan 28 10:50:34 2025
+[*]
+[dumpfile] "/mnt/huge/lenovo/nico/perso/git/Tutorials_MiSTer/NS1/dut.vcd"
+[dumpfile_mtime] "Tue Jan 28 10:49:57 2025"
+[dumpfile_size] 572
+[savefile] "/mnt/huge/lenovo/nico/perso/git/Tutorials_MiSTer/NS1/dut.gtkw"
+[timestart] 0
+[size] 1993 324
+[pos] 1931 579
+*-3.810738 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TOP.
+[sst_width] 273
+[signals_width] 110
+[sst_expanded] 1
+[sst_vpaned_height] 61
+@28
+TOP.clk
+@22
+TOP.out[3:0]
+@28
+TOP.reset
+[pattern_trace] 1
+[pattern_trace] 0

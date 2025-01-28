@@ -5,7 +5,7 @@ all: $(DUT)_tb.vcd
 
 GTKW:=$(DUT)_tb.gtkw
 view: $(DUT)_tb.vcd
-	gtkwave $< $$(test -f $(GTKW) && echo $(GTKW))&
+	gtkwave $< $$(test -f $(GTKW) && echo $(GTKW))
 
 $(DUT)_tb.vvp: ../rtl/$(DUT).v $(DUT)_tb.v
 	iverilog -o $@ $^

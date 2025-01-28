@@ -3,23 +3,39 @@
 #include <backends/imgui_impl_opengl3.h>
 #include <SDL2/SDL.h>
 #include <GL/glew.h> // Use GLEW for OpenGL function loading
-#include "Vcounter.h"
-Vcounter *top = NULL;
+#include "Vdut.h"
+#include "verilated_vcd_c.h"
+Vdut *dut = NULL;
+VerilatedVcdC* tfp = NULL;
 vluint64_t main_time = 0, last_step = 0;
 static bool clk, reset, autoreset, run = true, autostep = true, quit;
-static int step, step_time = 10, inc = 1;
-void init_top() { if (!top) top = new Vcounter; }
+static int step, step_time = 10, inc = 5, xmit;
+void init_dut() {
+    if (!dut) dut = new Vdut;
+    if (!tfp) {
+        tfp = new VerilatedVcdC;
+        Verilated::traceEverOn(true);
+        dut->trace(tfp, 99);
+#define VCD_FILE "Vdut_gui.vcd"
+        tfp->open(VCD_FILE);
+    }
+}
+void cleanup_dut() {
+    if (tfp){tfp->close();delete tfp;}
+    delete dut;
+}
 void handle_key_event(SDL_Event& event) {
     if (event.type == SDL_KEYDOWN) {
         if (event.key.keysym.sym == SDLK_c) { clk = !clk; }
         else if (event.key.keysym.sym == SDLK_r) { reset = !reset; }
+        else if (event.key.keysym.sym == SDLK_x) { xmit = 3; }
         else if (event.key.keysym.sym == SDLK_s) { step = 2; }
         else if (event.key.keysym.sym == SDLK_a) { autostep = !autostep; }
         else if (event.key.keysym.sym == SDLK_SPACE) { run = !run; }
     }
 }
 void render_gui() {
-    ImGui::Begin("counter");
+    ImGui::Begin("dut");
     ImGui::Checkbox("Run", &run);
     ImGui::SameLine();if (ImGui::Button("Quit")) { quit = true; }
     ImGui::SameLine();ImGui::Checkbox("AutoStep", &autostep);
@@ -31,11 +47,40 @@ void render_gui() {
     ImGui::Checkbox("clk", &clk);
     ImGui::SameLine();ImGui::Checkbox("AutoReset", &autoreset);
     ImGui::SameLine();if (ImGui::Button("Reset")) { reset = true; }
+    //ImGui::SameLine();
+    ImGui::Text("DATAI %08lX", (unsigned long)dut->DATAI);
+    ImGui::Text("DATAO %08lX", (unsigned long)dut->DATAO);
+    ImGui::Text("DEBUG %01X", (int)dut->DEBUG);
+    ImGui::Text("IRQ %d", (int)dut->IRQ);
+    ImGui::Text("WR %d", (int)dut->WR);
+    ImGui::Text("xmit %d", xmit);
     if ((main_time++>=(last_step+step_time)) && run) {
         if (step) { clk = !clk; }
-        top->clk = clk;
-        top->reset = reset;
-        top->eval();
+        if (Verilated::time() <= 10*inc) {
+        if (Verilated::time() >= 4*inc && Verilated::time() <= 7*inc) {
+            reset = 1;
+        } else if (Verilated::time() >= 8*inc) {
+            reset = 0;
+        }
+        }
+        dut->RXD = 1;
+        dut->CLK = clk;
+        dut->RES = reset;
+        if (xmit) {
+            switch (xmit) {
+                case 3:
+                    dut->BE = 0xF;
+                    dut->DATAI = 0x4100;
+                    dut->WR = 1;
+                    break;
+                case 1:
+                    dut->WR = 0;
+                    break;
+            }
+            xmit--;
+        }
+        dut->eval();
+        if(tfp)tfp->dump(Verilated::time());
         Verilated::timeInc(inc);
         if (step) { step--; }
         if (autostep && !step) { step = 2; }
@@ -43,12 +88,11 @@ void render_gui() {
         if (autoreset) reset = true;
         last_step = main_time;
     }
-    ImGui::SameLine();ImGui::Text("out %d", top->out);
     ImGui::End();
 }
 ////////////////////////////////////////////////////////////////////////////////
 int main() {
-    init_top();
+    init_dut();
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0) {
         printf("Error: %s\n", SDL_GetError());
         return -1;
@@ -105,5 +149,6 @@ int main() {
     SDL_GL_DeleteContext(gl_context);
     SDL_DestroyWindow(window);
     SDL_Quit();
+    cleanup_dut();
     return 0;
 }

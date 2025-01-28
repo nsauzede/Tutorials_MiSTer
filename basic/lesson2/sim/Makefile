@@ -8,7 +8,7 @@ image.hex: ../rtl/image.hex
 	./conv.py $< $@
 
 view: $(DUT).vcd
-	[ -f $(DUT).gtkw ] && (gtkwave $< $(DUT).gtkw &) || (gtkwave $< &)
+	[ -f $(DUT).gtkw ] && (gtkwave $< $(DUT).gtkw) || (gtkwave $<)
 
 $(DUT).vcd: $(DUT).output
 	vvp $<

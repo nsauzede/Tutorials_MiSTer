@@ -43,10 +43,10 @@ module darkuart_tb;
     // Testbench procedure
     initial begin
         // Initialize inputs
-        RES = 1;
+        RES = 0;
         RD = 0;
         WR = 0;
-        BE = 4'b0010;
+        BE = 4'b1111;
         DATAI = 32'h00000000;
         RXD = 1; // Idle UART state
         ESIMACK = 0;

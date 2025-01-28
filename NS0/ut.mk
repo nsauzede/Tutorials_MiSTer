@@ -12,13 +12,13 @@ UT_VERBOSE:=0
 # Or even UT internal ones, like VGO (valgrind options), eg:
 #VGO:=--suppressions=my_vg.supp --gen-suppressions=all
 
-TOP:=mux2
+DUT:=dut
 OBJ_DIR:=tmp
-V_TOP:=V$(TOP)
-V_TOP_:=$(OBJ_DIR)/$(V_TOP)
-V_MK_:=$(V_TOP).mk
+V_DUT:=V$(DUT)
+V_DUT_:=$(OBJ_DIR)/$(V_DUT)
+V_MK_:=$(V_DUT).mk
 V_MK:=$(OBJ_DIR)/$(V_MK_)
-V_SRC:=$(TOP).v
+V_SRC:=$(DUT).v
 
 ifndef VERILATOR_ROOT
 VERILATOR_ROOT:=/usr/share/verilator
@@ -26,14 +26,13 @@ endif
 
 CXXFLAGS+=-I $(OBJ_DIR)
 ifdef VERILATOR_ROOT
-CXXFLAGS+=-I $(VERILATOR_ROOT)/include
-CXXFLAGS+=-Wno-sign-compare
+CXXFLAGS+=-I $(VERILATOR_ROOT)/include -Wno-sign-compare
 endif
 
 UT_CUSTOM_ALL+=$(V_MK)
 UT_CUSTOM_DEPS+=$(V_MK)
 
-LDLIBS+=$(OBJ_DIR)/$(V_TOP)*.o
+LDLIBS+=$(OBJ_DIR)/$(V_DUT)*.o
 LDLIBS+=$(OBJ_DIR)/verilated*.o
 
 $(OBJ_DIR)/%.mk: $(V_SRC)
