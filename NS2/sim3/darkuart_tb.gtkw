@@ -1,39 +1,38 @@
 [*]
-[*] GTKWave Analyzer v3.3.120 (w)1999-2024 BSI
-[*] Tue Jan 28 11:48:29 2025
+[*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
+[*] Wed Jan 29 08:26:22 2025
 [*]
-[dumpfile] "/mnt/huge/lenovo/nico/perso/git/Tutorials_MiSTer/NS2/sim3/darkuart_tb.vcd"
-[dumpfile_mtime] "Tue Jan 28 11:47:52 2025"
-[dumpfile_size] 7175
-[savefile] "/mnt/huge/lenovo/nico/perso/git/Tutorials_MiSTer/NS2/sim3/dut.gtkw"
+[dumpfile] "/home/nsauzede/perso/git/Tutorials_MiSTer/NS2/sim3/darkuart_tb.vcd"
+[dumpfile_mtime] "Wed Jan 29 08:26:16 2025"
+[dumpfile_size] 8518
+[savefile] "/home/nsauzede/perso/git/Tutorials_MiSTer/NS2/sim3/darkuart_tb.gtkw"
 [timestart] 0
-[size] 1000 600
+[size] 1879 887
 [pos] -1 -1
-*-19.463421 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-17.158649 382500 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] darkuart_tb.
-[sst_width] 273
-[signals_width] 118
+[sst_width] 276
+[signals_width] 195
 [sst_expanded] 1
-[sst_vpaned_height] 157
-@420
-darkuart_tb.dut.BAUD_PERIOD
-@22
-darkuart_tb.dut.BE[3:0]
+[sst_vpaned_height] 253
 @28
 darkuart_tb.dut.CLK
-@22
-darkuart_tb.dut.DATAI[31:0]
-darkuart_tb.dut.DATAO[31:0]
-@28
-darkuart_tb.dut.IRQ
-darkuart_tb.dut.RD
 darkuart_tb.dut.RES
 darkuart_tb.dut.RXD
 darkuart_tb.dut.TXD
-darkuart_tb.dut.WR
-darkuart_tb.dut._ivl_2
-darkuart_tb.dut.greet
-@420
-darkuart_tb.dut.tx_index
+@22
+darkuart_tb.dut.be[3:0]
+darkuart_tb.dut.datai[31:0]
+darkuart_tb.dut.datao[31:0]
+@28
+darkuart_tb.dut.irq
+@29
+darkuart_tb.dut.irq_prev
+@22
+darkuart_tb.dut.leds[7:0]
+@28
+darkuart_tb.dut.rd
+darkuart_tb.dut.tx_busy
+darkuart_tb.dut.wr
 [pattern_trace] 1
 [pattern_trace] 0

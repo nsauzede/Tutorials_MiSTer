@@ -293,7 +293,7 @@ module darkuart
             UART_RFIFO[UART_RSTATE[2:0]] <= UART_RXDFF[2];
 `endif
         end
-`ifdef SIMULATION
+`ifdef SIMULATION__BADBAD
         else
         if(IOACK==1)
         begin
