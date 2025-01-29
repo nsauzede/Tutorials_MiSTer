@@ -28,8 +28,10 @@ module darkuart_dut (
         .IRQ(irq),
         .RXD(RXD),
         .TXD(TXD),
+`ifdef SIMULATION
         .ESIMREQ(),
         .ESIMACK(1'b0),
+`endif
         .DEBUG()
     );
 
@@ -56,10 +58,13 @@ module darkuart_dut (
 
             if (rd && !rdff) begin
                 //rx_data <= datao[15:8] ^ 8'h20; // XOR received byte with 0x20
-                leds <= datao[15:8] ^ 8'h20;
+                leds <= datao[15:8];
                 rdff <= 1;
                 //datai <= {24'b0, rx_data}; // Prepare TX data
+                if (datao[15:8] >= "A" && datao[15:8] <= "z")
                 datai <= {16'b0, datao[15:8] ^ 8'h20, 8'b0}; // Prepare TX data
+                else
+                datai <= {16'b0, datao[15:8], 8'b0}; // Prepare TX data
             end else if (rdff) begin
                 rd <= 0;
                 rdff <= 0;

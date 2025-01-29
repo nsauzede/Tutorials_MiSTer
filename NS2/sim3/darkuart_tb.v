@@ -76,10 +76,9 @@ module darkuart_tb;
         wait(irq == 0);
 
         // Wait for the reception on the DUT and check the leds
-        // We wait until the DUT receives the XOR'd value and checks the leds output
-        // The expected value for leds should be 'A' ^ 0x20 = 0x61 ('a')
-        wait(leds == 8'h61);
-        $display("Received data XOR'd and displayed on LEDs: %h", leds);
+        // The expected value for leds should be 'A' = 0x41
+        wait(leds == 8'h41);
+        $display("Received data displayed on LEDs: %h", leds);
 
         wait(irq == 1);
         #20
@@ -87,6 +86,10 @@ module darkuart_tb;
         #20
         rd = 0;
         wait(irq == 0);
+
+        // The expected received value should be 'A' ^ 0x20 = 0x61 ('a')
+        wait(datao[15:8] == 8'h61);
+        $display("Received data XOR'd: %h", datao[15:8]);
 
         #500
         // Finish simulation
