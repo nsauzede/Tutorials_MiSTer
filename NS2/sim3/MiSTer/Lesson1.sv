@@ -198,18 +198,23 @@ assign AUDIO_MIX = 0;
 //assign LED_DISK = 0;
 //assign LED_POWER = 0;
 //assign LED_USER=0;
-reg [31:0] cnt;
-initial begin
-cnt <= 0;
-end
+wire nreset;
+assign nreset = ~(the_8leds == "R");
+reg [31:0] BLINK = 0;
 always @(posedge CLK_50M) begin
-cnt <= cnt + 1;
+    BLINK <= ~nreset ? 0 : BLINK ? BLINK-1 : `BOARD_CK;
 end
-assign LED_USER = cnt[24];
-assign LED_POWER = {1'b1, cnt[23]};
-assign LED_DISK = { 1'b1, cnt[22]};
-//assign the_8leds = cnt[29:22];
+assign LED_USER = BLINK[24];
+assign LED_POWER = {1'b1, BLINK[23]};
+assign LED_DISK = { 1'b1, BLINK[22]};
+//assign the_8leds = BLINK[29:22];
+`ifdef TEST_MODE
+wire test_mode;
+assign test_mode = (the_8leds == "T");
+assign LEDS = ~test_mode ? the_8leds : (BLINK < (`BOARD_CK/2)) ? -1 : 0;
+`else
 assign LEDS = the_8leds;
+`endif
 
 assign BUTTONS = 0;
 

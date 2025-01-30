@@ -63,7 +63,7 @@ set_global_assignment -name VERILOG_MACRO "MISTER_DEBUG_NOHDMI=1"
 set_global_assignment -name VERILOG_MACRO "BOARD_ID=0"
 set_global_assignment -name VERILOG_MACRO "BOARD_CK=50000000"
 set_global_assignment -name VERILOG_MACRO "__UARTSPEED__=115200"
-set_global_assignment -name VERILOG_MACRO "SIMULATION_NOOO=1"
+set_global_assignment -name VERILOG_MACRO "TEST_MODE=1"
 
 source sys/sys.tcl
 source sys/sys_analog.tcl
