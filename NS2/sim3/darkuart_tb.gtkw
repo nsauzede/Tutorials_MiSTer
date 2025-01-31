@@ -1,20 +1,20 @@
 [*]
 [*] GTKWave Analyzer v3.3.120 (w)1999-2024 BSI
-[*] Thu Jan 30 21:24:35 2025
+[*] Sat Feb  1 17:53:52 2025
 [*]
 [dumpfile] "/mnt/huge/lenovo/nico/perso/git/Tutorials_MiSTer/NS2/sim3/darkuart_tb.vcd"
-[dumpfile_mtime] "Thu Jan 30 21:24:10 2025"
+[dumpfile_mtime] "Sat Feb  1 17:51:42 2025"
 [dumpfile_size] 8826
 [savefile] "/mnt/huge/lenovo/nico/perso/git/Tutorials_MiSTer/NS2/sim3/darkuart_tb.gtkw"
 [timestart] 0
-[size] 1879 887
+[size] 1717 404
 [pos] -1 -1
 *-17.158649 596200 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] darkuart_tb.
 [sst_width] 276
 [signals_width] 195
 [sst_expanded] 1
-[sst_vpaned_height] 253
+[sst_vpaned_height] 88
 @28
 darkuart_tb.CLK
 darkuart_tb.RES

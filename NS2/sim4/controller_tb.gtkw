@@ -1,0 +1,30 @@
+[*]
+[*] GTKWave Analyzer v3.3.120 (w)1999-2024 BSI
+[*] Mon Feb  3 12:46:10 2025
+[*]
+[dumpfile] "/mnt/huge/lenovo/nico/perso/git/Tutorials_MiSTer/NS2/sim4/controller_tb.vcd"
+[dumpfile_mtime] "Mon Feb  3 12:45:43 2025"
+[dumpfile_size] 1842
+[savefile] "/mnt/huge/lenovo/nico/perso/git/Tutorials_MiSTer/NS2/sim4/controller_tb.gtkw"
+[timestart] 0
+[size] 1914 359
+[pos] -1 -1
+*-5.034164 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 273
+[signals_width] 142
+[sst_expanded] 1
+[sst_vpaned_height] 71
+@28
+controller_tb.RES
+@22
+controller_tb.addr[31:0]
+@28
+controller_tb.clk
+@22
+controller_tb.data_in[7:0]
+controller_tb.uart_data[7:0]
+@28
+controller_tb.uart_done
+controller_tb.uart_start
+[pattern_trace] 1
+[pattern_trace] 0
