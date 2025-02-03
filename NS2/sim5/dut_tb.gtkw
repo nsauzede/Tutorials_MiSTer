@@ -1,0 +1,72 @@
+[*]
+[*] GTKWave Analyzer v3.3.120 (w)1999-2024 BSI
+[*] Mon Feb  3 21:43:24 2025
+[*]
+[dumpfile] "/mnt/huge/lenovo/nico/perso/git/Tutorials_MiSTer/NS2/sim5/dut_tb.vcd"
+[dumpfile_mtime] "Mon Feb  3 21:43:14 2025"
+[dumpfile_size] 33024
+[savefile] "/mnt/huge/lenovo/nico/perso/git/Tutorials_MiSTer/NS2/sim5/dut_tb.gtkw"
+[timestart] 0
+[size] 1919 783
+[pos] -1 -1
+*-48.190807 2165000000000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] dut_tb.
+[treeopen] dut_tb.dut1.
+[treeopen] dut_tb.dut1.io0.
+[sst_width] 273
+[signals_width] 208
+[sst_expanded] 1
+[sst_vpaned_height] 220
+@420
+dut_tb.dut1.BOARD_CK
+@28
+dut_tb.dut1.CLK
+@22
+dut_tb.dut1.DEBUG[3:0]
+@28
+dut_tb.dut1.ESIMACK
+dut_tb.dut1.ESIMREQ
+dut_tb.dut1.HLT
+@22
+dut_tb.dut1.IADDR[31:0]
+@28
+dut_tb.dut1.IDACK
+@22
+dut_tb.dut1.IDATA[31:0]
+@420
+dut_tb.dut1.INIT_FILE
+@22
+dut_tb.dut1.IODEBUG[3:0]
+dut_tb.dut1.LED[3:0]
+@28
+dut_tb.dut1.RES
+dut_tb.dut1.RXD
+dut_tb.dut1.TXD
+dut_tb.dut1.UART_RXD
+dut_tb.dut1.UART_TXD
+@22
+dut_tb.dut1.UDATA[31:0]
+dut_tb.dut1.XADDR[31:0]
+dut_tb.dut1.XATAO[31:0]
+dut_tb.dut1.XBE[3:0]
+@28
+dut_tb.dut1.XDREQ
+@22
+dut_tb.dut1.XDREQMUX[3:0]
+@28
+dut_tb.dut1.XRD
+dut_tb.dut1.XWR
+@22
+dut_tb.dut1.addr[29:0]
+dut_tb.dut1.be[3:0]
+dut_tb.dut1.count[31:0]
+dut_tb.dut1.datai[31:0]
+dut_tb.dut1.leds[7:0]
+@28
+dut_tb.dut1.rd
+dut_tb.dut1.tx_busy
+dut_tb.dut1.tx_busy2
+@29
+dut_tb.dut1.wr
+[pattern_trace] 1
+[pattern_trace] 0
