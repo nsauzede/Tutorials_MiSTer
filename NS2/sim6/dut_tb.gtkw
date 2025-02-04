@@ -1,22 +1,22 @@
 [*]
 [*] GTKWave Analyzer v3.3.120 (w)1999-2024 BSI
-[*] Sat Feb  8 23:56:57 2025
+[*] Sat Feb  8 23:57:55 2025
 [*]
-[dumpfile] "/mnt/huge/lenovo/nico/perso/git/Tutorials_MiSTer/NS2/sim5/dut_tb.vcd"
-[dumpfile_mtime] "Sat Feb  8 23:55:59 2025"
-[dumpfile_size] 30465
-[savefile] "/mnt/huge/lenovo/nico/perso/git/Tutorials_MiSTer/NS2/sim5/dut_tb.gtkw"
+[dumpfile] "/mnt/huge/lenovo/nico/perso/git/Tutorials_MiSTer/NS2/sim6/dut_tb.vcd"
+[dumpfile_mtime] "Sat Feb  8 23:46:06 2025"
+[dumpfile_size] 42583
+[savefile] "/mnt/huge/lenovo/nico/perso/git/Tutorials_MiSTer/NS2/sim6/dut_tb.gtkw"
 [timestart] 0
-[size] 1919 721
+[size] 1919 433
 [pos] -1 -1
-*-18.293457 1045000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-19.384474 3605000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] dut_tb.
 [treeopen] dut_tb.dut1.
 [treeopen] dut_tb.dut1.io0.
 [sst_width] 273
 [signals_width] 208
 [sst_expanded] 1
-[sst_vpaned_height] 207
+[sst_vpaned_height] 99
 @420
 dut_tb.BOARD_CK
 @28

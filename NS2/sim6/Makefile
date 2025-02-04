@@ -18,7 +18,7 @@ view: $(VCD)
 #       mydut_tb.vvp: mydut_tb.v
 # If a testbench has more deps, place deps overrides here, eg:
 #       mydut_tb.vvp: mydut_tb.v mydut.v extra_dep1.v ..
-dut_tb.vvp: dut_tb.v dut.v ../rtl/darkram.v ../rtl/darkuart.v ../rtl/darkio.v
+dut_tb.vvp: dut_tb.v dut.v ../rtl/darkram.v ../rtl/darkuart.v ../rtl/darkio.v ../rtl/darkpll.v
 
 .PRECIOUS: %.vvp %.vcd
 

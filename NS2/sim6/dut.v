@@ -8,9 +8,18 @@ module dut #(
     input XRES,
     input XCLK
 );
-    wire RES, CLK;
-    assign RES = XRES;
-    assign CLK = XCLK;
+
+    // clock and reset
+
+    wire CLK,RES;
+    darkpll darkpll0
+    (
+        .XCLK(XCLK),
+        .XRES(XRES),
+        .CLK(CLK),
+        .RES(RES)
+    );
+
     wire [3:0] LED;     // on-board leds
     wire [3:0] DEBUG;   // osciloscope
     wire UART_RXD;      // UART receive line
