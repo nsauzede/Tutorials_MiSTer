@@ -78,7 +78,6 @@ module dut #(
                     end else if (!irq) begin
                         tx_busy <= 0;
                         wrff <= 1;
-                        datai[15:8] <= {4'h3, IDATA[3:0]};
                         datai[15:8] <= (IDATA[3:0]<4'ha)?{4'h3, IDATA[3:0]}:{4'h4, IDATA[3:0]-4'ha+4'h1};
                         tx_busy2 <= 1;
                     end

@@ -216,7 +216,7 @@
 // separate 16-bit and 8-bit words. Typically, the RMW cycle results in a
 // decrease of 5% in the performance (not the clock, but the instruction
 // pipeline eficiency) due to memory wait-states.
-//`define __RMW_CYCLE__
+`define __RMW_CYCLE__
 
 // bram wait states
 // 
