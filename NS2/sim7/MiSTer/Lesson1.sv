@@ -7,6 +7,8 @@
 //  vga and HDMI. It also implements the OSD because with sorelig's sys library
 //  lots of great functionality comes for free.
 //============================================================================
+`timescale 1ns / 1ps
+`include "../../rtl/config.vh"
 
 module emu
 (
