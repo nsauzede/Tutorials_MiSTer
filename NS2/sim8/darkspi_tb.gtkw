@@ -1,0 +1,42 @@
+[*]
+[*] GTKWave Analyzer v3.3.121 (w)1999-2024 BSI
+[*] Fri Mar 14 17:44:35 2025
+[*]
+[dumpfile] "darkspi_tb.vcd"
+[dumpfile_mtime] "Fri Mar 14 17:40:26 2025"
+[dumpfile_size] 411947
+[savefile] "darkspi_tb.gtkw"
+[timestart] 0
+[size] 1919 492
+[pos] -1 -1
+*-22.854355 51545000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] darkspi_tb.
+[treeopen] darkspi_tb.darkspi1.
+[sst_width] 273
+[signals_width] 258
+[sst_expanded] 1
+[sst_vpaned_height] 112
+@28
+darkspi_tb.darkspi1.CLK
+@22
+darkspi_tb.darkspi1.BE[3:0]
+darkspi_tb.leds[7:0]
+@28
+darkspi_tb.darkspi1.CSN
+@22
+darkspi_tb.darkspi1.DATAI[31:0]
+darkspi_tb.darkspi1.DATAO[31:0]
+@29
+darkspi_tb.darkspi1.IRQ
+@28
+darkspi_tb.darkspi1.MISO
+darkspi_tb.darkspi1.MOSI
+darkspi_tb.darkspi1.RD
+darkspi_tb.darkspi1.RES
+darkspi_tb.darkspi1.SCK
+darkspi_tb.darkspi1.WR
+darkspi_tb.x_l_flag
+@22
+darkspi_tb.x_l_response[15:0]
+[pattern_trace] 1
+[pattern_trace] 0
